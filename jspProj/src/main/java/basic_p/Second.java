@@ -1,4 +1,4 @@
-package baisc_p;
+package basic_p;
 
 public class Second {
 	int a = 10;

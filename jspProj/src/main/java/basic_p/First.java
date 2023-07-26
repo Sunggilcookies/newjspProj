@@ -1,4 +1,4 @@
-package baisc_p;
+package basic_p;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
