@@ -1,0 +1,38 @@
+
+sum[0] 
+//1등찾기
+for(i->5]
+if (sum[0~4(i)]>=sum[0]){//총합 0번부터 5번까지중에 큰값 추출
+    sum1=sum[i];	//sum1에 1번째로 큰 sum값 입력
+    ranking[i]=1; 	//ranking[i]에 1등 입력
+}
+//2등찾기
+if (sum[0~4(i)]>=sum[0]		//총합 0번부터 5번까지중
+	&& sum1>sum[i]		){//가장큰sum보다는 작아야함
+    sum2=sum[i];	//sum2에 2번째로 큰 sum값 입력
+    ranking[i]=2; 	//ranking[i]에 2등 입력
+}
+//3등찾기
+if (sum[0~4(i)]>=sum[0]		//총합 0번부터 5번까지중
+	&& sum2>sum[i]		){//2번째큰sum보다는 작아야함
+    sum3=sum[i];	//sum3에 3번째로 큰 sum값 입력
+    ranking[i]=3; 	//ranking[i]에 3등 입력
+}
+//4등찾기
+if (sum[0~4(i)]>=sum[0]		//총합 0번부터 5번까지중
+	&& sum3>sum[i]		){//3번재큰sum보다는 작아야함
+    sum4=sum[i];	//sum4에 4번째로 큰 sum값 입력
+    ranking[i]=4; 	//ranking[i]에 4등 입력
+}
+//5등찾기
+if (sum[0~4(i)]>=sum[0]		//총합 0번부터 5번까지중
+	&& sum4>sum[i]		){//4번째큰 sum보다는 작아야함
+    sum2=sum[i];	//sum2에 5번째로 큰 sum값 입력
+    ranking[i]=5; 	//ranking[i]에 5등 입력
+}
+
+ranking1 
+ranking2
+ranking3
+ranking4
+ranking5

@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+
 	<h2>errorPage 처리</h2>
 	<%=exception.getMessage() %>
 	 <!-- exception 사용시 isErrorPage="true" 필요 -->

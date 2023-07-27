@@ -57,21 +57,7 @@ public class TSNMain {
 			System.out.println(ttt);
 		}
 		
-			/*1. 자릿수만큼 나눠주기 
-i= 1000
-test=i
-a=0;
-	while(a){
-	
-	test / 10
-	a += 1 //a = i의 자릿수
-		if(i==1){	//i가 1이 될때까지  나눠준다.
-			return a;
-		}
-	}
-	for
 
-JAVA_HOME*/
 	}
 
 }

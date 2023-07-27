@@ -7,7 +7,7 @@ public class TSNMainTrycatch {
 		System.out.println("3,6,9 게임 ");
 		System.out.println("1 -> 20 ");
 
-		for (int i = 1; i <= 20; i++) {
+		for (int i = 1; i <= 99; i++) {
 			int one = i % 10; // 0~9
 			
 			int bug = one % 3 ; // i의 일의자리수가 0369일때 bug 가 0이나와 
