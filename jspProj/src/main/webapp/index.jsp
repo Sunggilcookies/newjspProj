@@ -22,6 +22,11 @@
 <a href="err/ddd.jsp">404</a>
 <a href="err/eee.jsp">type</a>
 <a href="request/numForm.jsp">type</a>
-
+<h1>view</h1>
+<a href="redirect/a.jsp?nick=ccc">redirect</a>
+<a href="forward/a.jsp?nick=ccc">forward</a>
+<a href="include/a.jsp?nick=ccc">include</a>
+<h1>work</h1>
+<a href="work/write.jsp">write</a>
 </body>
 </html>
