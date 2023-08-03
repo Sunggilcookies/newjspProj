@@ -11,9 +11,9 @@
 	<%
 	
 	//값 받아오기
-	String[] firstNumber = request.getParameterValues("first");
-	String[] secondNumber = request.getParameterValues("second");
-	secondNumber=char
+	String firstNumber = request.getParameterValues("first");
+	String secondNumber = request.getParameterValues("second");
+	
 	String[] name = request.getParameterValues("name");
 	System.out.println(Arrays.toString(secondNumber));
 	//번호 집어넣기
