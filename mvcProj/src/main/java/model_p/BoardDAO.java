@@ -8,13 +8,11 @@ import java.util.ArrayList;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
-
 import javax.sql.DataSource;
-
-//뭔진 모르겠지만 완성~~~~~~~
 
 
 public class BoardDAO {
+
 	Connection con;
 	PreparedStatement ptmt;
 	ResultSet rs;
@@ -24,20 +22,23 @@ public class BoardDAO {
 		try {
 			Context init = new InitialContext();
 			DataSource ds = (DataSource)init.lookup("java:/comp/env/mvc322");
-			con= ds.getConnection();
+			con = ds.getConnection();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-				
 	}
+	
 	public ArrayList<BoardDTO> list(){
-		sql = "select * from board";
+		
+		sql = "select * from board order by id desc";
 		ArrayList<BoardDTO> res = new ArrayList<>();
+		
 		try {
 			ptmt = con.prepareStatement(sql);
 			rs = ptmt.executeQuery();
+			
 			while(rs.next()) {
 				BoardDTO dto = new BoardDTO();
 				dto.setId(rs.getInt("id"));
@@ -50,32 +51,33 @@ public class BoardDAO {
 				dto.setTitle(rs.getString("title"));
 				dto.setUpfile(rs.getString("upfile"));
 				dto.setContent(rs.getString("content"));
-				dto.setReg_date(rs.getTimestamp("reg_date")); //sql.date로 되어있었음 util.date여야함
-				res.add(dto);
+				dto.setReg_date(rs.getTimestamp("reg_date"));
 				
+				res.add(dto);
 			}
-					
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
 			close();
 		}
-		
-		
-		close();
+		 
 		return res;
 	}
 	
 	
 	
-	public BoardDTO detail(int id) {	//상세페이지 sql처리
+	public BoardDTO detail(int id){
+		
 		sql = "select * from board where id = ?";
 		BoardDTO dto = null;
+		
 		try {
 			ptmt = con.prepareStatement(sql);
-			ptmt.setInt(1,id);
+			ptmt.setInt(1, id);
 			rs = ptmt.executeQuery();
+			
 			if(rs.next()) {
 				dto = new BoardDTO();
 				dto.setId(rs.getInt("id"));
@@ -86,13 +88,84 @@ public class BoardDAO {
 				dto.setPname(rs.getString("pname"));
 				dto.setPw(rs.getString("pw"));
 				dto.setTitle(rs.getString("title"));
-				dto.setUpfile(rs.getString("upfile")); //파일이 있냐? 없냐? 사진이냐
+				dto.setUpfile(rs.getString("upfile"));
 				dto.setContent(rs.getString("content"));
-				dto.setReg_date(rs.getTimestamp("reg_date")); //sql.date로 되어있었음 util.date여야함
+				dto.setReg_date(rs.getTimestamp("reg_date"));
 				
 				
 			}
-					
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		 
+		return dto;
+	}
+	
+	
+	public void addCount(int id){
+		
+		sql = "update board set cnt = cnt + 1 where id = ?";
+		
+		try {
+			ptmt = con.prepareStatement(sql);
+			ptmt.setInt(1, id);
+			ptmt.executeUpdate();
+				
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+	}
+	
+	public void write(BoardDTO dto){
+		
+		sql = "insert into board (title, pname, pw, upfile, content, seq, lev, gid, cnt, reg_date) "+ 
+		 "values (?, ?, ?, ?, ?,0,0,0,-1, sysdate() )";
+		
+		try {
+			ptmt = con.prepareStatement(sql);
+			ptmt.setString(1, dto.getTitle());
+			ptmt.setString(2, dto.getPname());
+			ptmt.setString(3, dto.getPw());
+			ptmt.setString(4, dto.getUpfile());
+			ptmt.setString(5, dto.getContent());
+			ptmt.executeUpdate();
+			
+			ptmt.close();
+			
+			sql = "select max(id) from board";
+			ptmt = con.prepareStatement(sql);
+			rs = ptmt.executeQuery();
+			rs.next();
+			dto.setId(rs.getInt(1));
+			
+				
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+	}
+	
+	public int delete(BoardDTO dto){
+		
+		sql = "delete from board where id = ? and pw = ?";
+		int res = 0;
+		try {
+			ptmt = con.prepareStatement(sql);
+			
+			ptmt.setInt(1, dto.getId());
+			ptmt.setString(2, dto.getPw());
+			
+			res = ptmt.executeUpdate();
+				
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -100,13 +173,74 @@ public class BoardDAO {
 			close();
 		}
 		
-		return dto;
+		return res;
 	}
 	
-	public void close() {
-		if(rs!=null) try { rs.close(); } catch (Exception e) {}
-		if(ptmt!=null) try { ptmt.close(); } catch (Exception e) {}
-		if(con!=null) try { con.close(); } catch (Exception e) {}
+	
+	public BoardDTO idPwChk(BoardDTO dto){
 		
+		sql = "select * from board where id = ? and pw = ?";
+		BoardDTO res = null;
+		try {
+			ptmt = con.prepareStatement(sql);
+			
+			ptmt.setInt(1, dto.getId());
+			ptmt.setString(2, dto.getPw());
+			
+			rs = ptmt.executeQuery();
+			
+			if(rs.next()) {
+				res = new BoardDTO();
+				res.setId(rs.getInt("id"));
+				res.setUpfile(rs.getString("upfile"));
+			}
+				
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		
+		return res;
+	}
+	
+	
+	
+	
+	public int modify(BoardDTO dto){
+		
+		int res = 0;
+		
+		sql = "update board set title = ?, pname = ?, upfile = ?, content = ? "+
+		" where id = ? and pw = ?";
+		
+		try {
+			ptmt = con.prepareStatement(sql);
+			ptmt.setString(1, dto.getTitle());
+			ptmt.setString(2, dto.getPname());
+			ptmt.setString(3, dto.getUpfile());
+			ptmt.setString(4, dto.getContent());
+			ptmt.setInt(5, dto.getId());
+			ptmt.setString(6, dto.getPw());
+			
+			res = ptmt.executeUpdate();
+							
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		
+		return res;
+	}
+	
+	
+	
+	public void close() {
+		if(rs!=null) try { rs.close();	} catch (Exception e) {}
+		if(ptmt!=null) try { ptmt.close();	} catch (Exception e) {}
+		if(con!=null) try { con.close();	} catch (Exception e) {}
 	}
 }
