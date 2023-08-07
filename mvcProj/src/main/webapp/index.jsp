@@ -11,5 +11,7 @@ mvcProj
 
 
 <a href="board/BList">게시판</a>
+<a href="gallery/GList">갤러리</a>
+
 </body>
 </html>

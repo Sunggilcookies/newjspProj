@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import control.BoardService;
 
-public class BDeleteForm { //인터페이스 상속받음
+public class BDeleteForm implements BoardService{ //인터페이스 상속받음
 
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		request.setAttribute("mainTitle", "게시판 삭제");

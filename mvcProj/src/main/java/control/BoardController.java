@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model_p.PageData;
+
 
 @WebServlet("/board/*")
 public class BoardController extends HttpServlet {
@@ -41,14 +43,14 @@ public class BoardController extends HttpServlet {
 			//요청과 응답하는 문자를 인코딩해줌 안깨지게
 			request.setCharacterEncoding("UTF-8");
 			//mainPage라는 변수로 seviceStr 값 포장
-			request.setAttribute("mainPage", serviceStr); 
+			request.setAttribute("mainPage", "board/"+serviceStr);
+			//
+			request.setAttribute("pd", new PageData(request));
+			
+			
 			//인터페이스에서 
 			BoardService service = (BoardService)Class.forName("ser_p."+serviceStr).newInstance();
-			service.execute(request,response);
-			
-			
-			
-			
+			service.execute(request,response);			
 			
 			RequestDispatcher dispatcher = 
 					request.getRequestDispatcher("/views/template.jsp");
