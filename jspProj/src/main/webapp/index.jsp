@@ -41,5 +41,9 @@
 <a href="session/modify.jsp">modify</a>
 <a href="session/delete.jsp">delete</a>
 <a href="session/logMain.jsp">로그인메인</a>
+<h1>로그인입니당.</h1>
+<a href="login/loginForm.jsp">로그인폼</a>
+<a href="login/hi.jsp">테스트</a>
+
 </body>
 </html>
