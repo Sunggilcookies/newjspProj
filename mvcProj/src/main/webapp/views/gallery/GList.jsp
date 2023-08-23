@@ -1,5 +1,6 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="model_p.GalleryDTO"%>
+<%@page import = "model_p.PageData" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
@@ -13,7 +14,7 @@
 <body>
 <h2> GLIST입니다</h2>
 
-<%-- <table border="">
+ <table border="">
 	<tr align="center">
 		<td>번호</td>
 		<td>사진</td>
@@ -26,21 +27,21 @@
 	
 	
 <%
-
+PageData pd = (PageData)request.getAttribute("pd");
 int i=0;
-for(GalleryDTO dto : (ArrayList<GalleryDTO>)request.getAttribute("mainData")){
+for(GalleryDTO gto :(ArrayList<GalleryDAO>)request.getAttribute("mainData")){
 i++;
 %>
 	<tr>
 		<td><%=i%></td>
-		<td><%=dto.getUpfile() %></td>
-		<td><%=dto.getTitle() %></td>
-		<td><%=dto.getPname() %></td>
-		<td><%=dto.getReg_dateStr()%></td>
+		<td><%=gto.getUpfile() %></td>
+		<td><%=gto.getTitle() %></td>
+		<td><%=gto.getPname() %></td>
+		<td><%=gto.getReg_dateStr()%></td>
 	</tr>
 	<%} %>
 </table>
- --%>
+
 
 </body>
 </html>

@@ -26,7 +26,20 @@
 <a href="redirect/a.jsp?nick=ccc">redirect</a>
 <a href="forward/a.jsp?nick=ccc">forward</a>
 <a href="include/a.jsp?nick=ccc">include</a>
-<h1>work</h1>
+<h1>cookie</h1>
 <a href="work/write.jsp">write</a>
+<a href="cookie/make.jsp">make</a>
+<a href="cookie/view.jsp">view</a>
+<a href="cookie/modify.jsp">modify</a>
+<a href="cookie/delete.jsp">delete</a>
+<a href="cookie/logMain.jsp">로그인</a>
+<h1>newcookie</h1>
+<a href="newcookie/logMain.jsp">로그인</a>
+<h1>session</h1>
+<a href="session/make.jsp">make</a>
+<a href="session/view.jsp">view</a>
+<a href="session/modify.jsp">modify</a>
+<a href="session/delete.jsp">delete</a>
+<a href="session/logMain.jsp">로그인메인</a>
 </body>
 </html>

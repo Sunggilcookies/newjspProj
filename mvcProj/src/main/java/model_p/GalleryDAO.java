@@ -47,7 +47,6 @@ public class GalleryDAO {
 				dto.setUpfile(rs.getString("upfile"));
 				dto.setContent(rs.getString("content"));
 				dto.setReg_date(rs.getTimestamp("reg_date"));
-
 			
 			}
 
